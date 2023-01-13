@@ -19,7 +19,7 @@ upstreamLock:
     repo: git@github.com:droot/kpt-packages
     directory: /echo
     ref: main
-    commit: e31202f81b755af6e8008e72b5b26bd58932e10f
+    commit: 68c22339eddd6c76ab3265314cb4d3d6e0bc4c22
 info:
   description: A simple echo service
 pipeline:
@@ -28,5 +28,3 @@ pipeline:
       configPath: fn-config-update-host.yaml
     - image: set-labels:v0.1.5
       configPath: fn-config-setlabels.yaml
-    - image: set-namespace:v0.3.4
-      configPath: package-context.yaml

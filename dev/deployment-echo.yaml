@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: # kpt-merge: example/echo
+metadata: # kpt-merge: echo/echo
   name: echo
-  namespace: dev
+  namespace: echo
   labels:
     app: dev
   annotations:
-    internal.kpt.dev/upstream-identifier: apps|Deployment|example|echo
+    internal.kpt.dev/upstream-identifier: apps|Deployment|echo|echo
 spec:
   selector:
     matchLabels:
