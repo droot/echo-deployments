@@ -1,0 +1,32 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: dev
+  labels:
+    app: dev
+  annotations:
+    config.kubernetes.io/local-config: "true"
+upstream:
+  type: git
+  git:
+    repo: git@github.com:droot/kpt-packages
+    directory: /echo
+    ref: main
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: git@github.com:droot/kpt-packages
+    directory: /echo
+    ref: main
+    commit: e31202f81b755af6e8008e72b5b26bd58932e10f
+info:
+  description: A simple echo service
+pipeline:
+  mutators:
+    - image: apply-replacements:v0.1.1
+      configPath: fn-config-update-host.yaml
+    - image: set-labels:v0.1.5
+      configPath: fn-config-setlabels.yaml
+    - image: set-namespace:v0.3.4
+      configPath: package-context.yaml
