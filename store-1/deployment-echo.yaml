@@ -11,7 +11,7 @@ spec:
   selector:
     matchLabels:
       app: store-1
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
