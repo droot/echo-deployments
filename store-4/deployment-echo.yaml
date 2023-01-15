@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # kpt-merge: echo/echo
+  name: echo
+  namespace: echo
+  labels:
+    app: store-4
+  annotations:
+    internal.kpt.dev/upstream-identifier: apps|Deployment|echo|echo
+spec:
+  selector:
+    matchLabels:
+      app: store-4
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: store-4
+    spec:
+      containers:
+      - name: echo
+        image: hashicorp/http-echo
+        args:
+        - -text=store-4
+        ports:
+        - containerPort: 5678

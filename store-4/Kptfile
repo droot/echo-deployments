@@ -1,0 +1,30 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: store-4
+  labels:
+    app: store-4
+  annotations:
+    config.kubernetes.io/local-config: "true"
+upstream:
+  type: git
+  git:
+    repo: git@github.com:droot/kpt-packages
+    directory: /echo
+    ref: main
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: git@github.com:droot/kpt-packages
+    directory: /echo
+    ref: main
+    commit: fc8093a2e66f66cfd9dc38fea134bdaf0bf9ce55
+info:
+  description: A simple echo service
+pipeline:
+  mutators:
+    - image: apply-replacements:v0.1.1
+      configPath: fn-config-update-host.yaml
+    - image: set-labels:v0.1.5
+      configPath: fn-config-setlabels.yaml
